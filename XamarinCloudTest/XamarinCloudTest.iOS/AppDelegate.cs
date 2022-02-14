@@ -12,8 +12,8 @@ namespace XamarinCloudTest.iOS
     public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
         public override UIWindow Window { get; set; }
-        public CKDatabase PublicDatabase { get; set; }
-        public CKDatabase PrivateDatabase { get; set; }
+        public CKDatabase PublicDatabase { get; set; } = null;
+        public CKDatabase PrivateDatabase { get; set; } = null;
 
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -26,10 +26,16 @@ namespace XamarinCloudTest.iOS
         {
             app.RegisterForRemoteNotifications();
 
-            // Get the default public and private databases for
-            // the application
-            PublicDatabase = CKContainer.DefaultContainer.PublicCloudDatabase;
-            PrivateDatabase = CKContainer.DefaultContainer.PrivateCloudDatabase;
+            try {
+                // Get the default public and private databases for
+                // the application
+                PublicDatabase = CKContainer.DefaultContainer?.PublicCloudDatabase;
+                PrivateDatabase = CKContainer.DefaultContainer?.PrivateCloudDatabase;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
 
             Xamarin.Forms.Forms.Init();
             LoadApplication(new App());

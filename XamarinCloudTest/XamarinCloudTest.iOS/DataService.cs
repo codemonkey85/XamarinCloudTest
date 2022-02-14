@@ -18,7 +18,7 @@ namespace XamarinCloudTest.iOS
             newRecord["name"] = (NSString)name;
 
             // Save it to the database
-            ThisApp.PublicDatabase.SaveRecord(newRecord, (record, err) => {
+            ThisApp.PrivateDatabase?.SaveRecord(newRecord, (record, err) => {
                 // Was there an error?
                 if (err != null) {
                 }
@@ -29,7 +29,7 @@ namespace XamarinCloudTest.iOS
         {
             // Create a record ID and fetch the record from the database
             var recordID = new CKRecordID(myRecordName);
-            ThisApp.PublicDatabase.FetchRecord(recordID, (record, err) => {
+            ThisApp.PrivateDatabase?.FetchRecord(recordID, (record, err) => {
                 // Was there an error?
                 if (err != null) {
                 }
@@ -40,7 +40,7 @@ namespace XamarinCloudTest.iOS
         {
             // Create a record ID and fetch the record from the database
             var recordID = new CKRecordID(myRecordName);
-            ThisApp.PublicDatabase.FetchRecord(recordID, (record, err) => {
+            ThisApp.PrivateDatabase?.FetchRecord(recordID, (record, err) => {
                 // Was there an error?
                 if (err != null) {
 
@@ -50,7 +50,7 @@ namespace XamarinCloudTest.iOS
                     record["name"] = (NSString)newName;
 
                     // Save changes to database
-                    ThisApp.PublicDatabase.SaveRecord(record, (r, e) => {
+                    ThisApp.PrivateDatabase?.SaveRecord(record, (r, e) => {
                         // Was there an error?
                         if (e != null) {
                         }
